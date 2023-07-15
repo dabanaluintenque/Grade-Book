@@ -1,5 +1,5 @@
 namespace GradeBook {
-    class Book {
+    public class Book {
 
         public Book(string name){
             grades = new List<double>();
@@ -9,24 +9,24 @@ namespace GradeBook {
             grades.Add(grade);
         }
 
-        public void showStatistics(){
-            var result = 0.0;
-            var highGrade = double.MinValue;
-            var lowGrade = double.MaxValue;
-
-            foreach (var number in grades){
-                highGrade = Math.Max( number, highGrade);
-                lowGrade = Math.Min(number, lowGrade);
-                result += number;
+        // the Type Statistics come from class Statiscs
+        public Statistics GetStatistics(){
+            var result = new Statistics();
+            result.Average = 0.0;
+            result.High = double.MinValue;
+            result.Low = double.MaxValue;
+            
+            foreach (var grade in grades){
+                result.High = Math.Max( grade, result.High);
+                result.Low = Math.Min(grade, result.Low);
+                result.Average += grade;
             }
 
-            result /= grades.Count;
-            Console.WriteLine($"The author name is {name}");
-            Console.WriteLine($"The average grade is {result:N2}");
-            Console.WriteLine($"The higest grade is {highGrade}");
-            Console.WriteLine($"The lowest grade is {lowGrade}");
+            result.Average /= grades.Count;
+            return result;
+           
         }
         List<double> grades;
-        private string name;
+        public string name;
     }
 }
