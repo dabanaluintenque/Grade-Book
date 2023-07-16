@@ -3,10 +3,10 @@ namespace GradeBook.Tests;
 public class BookTests
 {
     [Fact]  // fact is attribute 
-    public void Test1()  // fact is attached to this method
+    public void BookCalculateStatistics()  // fact is attached to this method
     {
         // arrange
-        
+        var tst1 = new TypeTests();
         var book = new Book("");
         book.AddGrade(89.1);
         book.AddGrade(90.5);
@@ -19,6 +19,7 @@ public class BookTests
         Assert.Equal(85.6, result.Average,1);
         Assert.Equal(90.5, result.High, 1);
         Assert.Equal(77.3, result.Low, 1);
+        tst1.Test1();
         
         
 
