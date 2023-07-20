@@ -7,7 +7,7 @@ namespace GradeBook {
         }
         public char AddLetterGrade( char letter) 
         {
-          /* switch (letter)
+           switch (letter)
            {
             case 'A':
                 AddGrade(90);
@@ -21,7 +21,7 @@ namespace GradeBook {
             default:
                 AddGrade(0);
                 break;
-           }*/
+           }
            return letter;
         }
         public void AddGrade(double grade) {
@@ -32,11 +32,9 @@ namespace GradeBook {
             }
             else 
             {
-                Console.WriteLine("Invalid value");
-                
+                throw new ArgumentException($"Invalide {nameof(grade)}");      
             }     
         }
-
         // the Type Statistics come from class Statiscs
         public Statistics GetStatistics(){
             var result = new Statistics();
@@ -84,7 +82,6 @@ namespace GradeBook {
 
             }
             return result;
-           
         }
         List<double> grades;
         public string Name;

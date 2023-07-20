@@ -24,14 +24,23 @@ namespace GradeBook
             book.AddGrade(90.5);
             book.AddGrade(77.5);*/
             while (true) {
-                Console.WriteLine("Enter The list of Grades");
+                Console.WriteLine("Enter The list of Grades or Enter q to Quit");
                 var input = Console.ReadLine();
-                if( input == "Q"){
+                if( input == "q"){
                     Console.WriteLine("I am out");
                     break;
                 }
+            try{
                 var grade = double.Parse(input);
                 book.AddGrade(grade);
+            } catch(ArgumentException ex){
+                Console.WriteLine(ex.Message);
+            } catch(Exception ex){
+                Console.WriteLine(ex.Message);
+            }
+            finally{
+                //Console.WriteLine("****");
+            }
             }
             var stats = book.GetStatistics();
             Console.WriteLine($"The author name is {book.Name}");
