@@ -19,10 +19,11 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            var book = new Book("Dabana Intenque");
-           /*book.AddGrade(89.1);
-            book.AddGrade(90.5);
-            book.AddGrade(77.5);*/
+            Console.WriteLine("Enter book name");
+            var bookname = Console.ReadLine();
+            var book = new Book(bookname);
+            book.GradeAdded += onGradeAdded;
+
             while (true) {
                 Console.WriteLine("Enter The list of Grades or Enter q to Quit");
                 var input = Console.ReadLine();
@@ -48,6 +49,10 @@ namespace GradeBook
             Console.WriteLine($"The higest grade is {stats.High}");
             Console.WriteLine($"The lowest grade is {stats.Low}");
             Console.WriteLine($"The letter is {stats.Letter}");
-        }        
+        } 
+
+        static void onGradeAdded(object sender, EventArgs e) {
+            Console.WriteLine("Grade was added");
+        }   
     }
 } 

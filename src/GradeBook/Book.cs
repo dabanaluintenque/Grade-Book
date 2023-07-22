@@ -1,5 +1,10 @@
 namespace GradeBook {
-    public class Book {
+
+    public delegate void GradeAddedDelegate( object sender, EventArgs args);
+
+    
+    public class Book : NamedOjbect  {
+
 
         public Book(string name){
             grades = new List<double>();
@@ -28,14 +33,17 @@ namespace GradeBook {
             
             if (grade >= 0 && grade <= 100)
             {
-                 grades.Add(grade);
+                grades.Add(grade);
+                if(GradeAdded != null) {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else 
             {
                 throw new ArgumentException($"Invalide {nameof(grade)}");      
             }     
         }
-        // the Type Statistics come from class Statiscs
+        public event GradeAddedDelegate GradeAdded;
         public Statistics GetStatistics(){
             var result = new Statistics();
             result.Average = 0.0;
@@ -84,6 +92,6 @@ namespace GradeBook {
             return result;
         }
         List<double> grades;
-        public string Name;
+       
     }
 }
