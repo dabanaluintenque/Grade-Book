@@ -19,37 +19,46 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter book name");
-            var bookname = Console.ReadLine();
-            var book = new Book(bookname);
+            IBook book = new DiskBook("Don't give up");
             book.GradeAdded += onGradeAdded;
 
-            while (true) {
-                Console.WriteLine("Enter The list of Grades or Enter q to Quit");
-                var input = Console.ReadLine();
-                if( input == "q"){
-                    Console.WriteLine("I am out");
-                    break;
-                }
-            try{
-                var grade = double.Parse(input);
-                book.AddGrade(grade);
-            } catch(ArgumentException ex){
-                Console.WriteLine(ex.Message);
-            } catch(Exception ex){
-                Console.WriteLine(ex.Message);
-            }
-            finally{
-                //Console.WriteLine("****");
-            }
-            }
+            EnterGrades(book);
+
             var stats = book.GetStatistics();
             Console.WriteLine($"The author name is {book.Name}");
             Console.WriteLine($"The average grade is {stats.Average:N2}");
             Console.WriteLine($"The higest grade is {stats.High}");
             Console.WriteLine($"The lowest grade is {stats.Low}");
             Console.WriteLine($"The letter is {stats.Letter}");
-        } 
+        }
+
+        private static void EnterGrades(IBook book)
+        {
+            while (true)
+            {
+                Console.WriteLine("Enter The list of Grades or Enter q to Quit");
+                var input = Console.ReadLine();
+                if (input == "q")
+                {
+                    Console.WriteLine("I am out");
+                    break;
+                }
+                try
+                {
+                    var grade = double.Parse(input);
+                    book.AddGrade(grade);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
+        }
 
         static void onGradeAdded(object sender, EventArgs e) {
             Console.WriteLine("Grade was added");

@@ -1,12 +1,10 @@
 namespace GradeBook {
 
     public delegate void GradeAddedDelegate( object sender, EventArgs args);
-
     
-    public class Book : NamedOjbect  {
+    public class InMemoryBook : Book  {
 
-
-        public Book(string name){
+        public InMemoryBook(string name) : base(name) {
             grades = new List<double>();
             Name = name;
         }
@@ -29,7 +27,7 @@ namespace GradeBook {
            }
            return letter;
         }
-        public void AddGrade(double grade) {
+        public override void AddGrade(double grade) {
             
             if (grade >= 0 && grade <= 100)
             {
@@ -43,33 +41,14 @@ namespace GradeBook {
                 throw new ArgumentException($"Invalide {nameof(grade)}");      
             }     
         }
-        public event GradeAddedDelegate GradeAdded;
-        public Statistics GetStatistics(){
-            var result = new Statistics();
-            result.Average = 0.0;
-            result.High = double.MinValue;
-            result.Low = double.MaxValue;
-            
-            /*foreach (var grade in grades){
-                result.High = Math.Max( grade, result.High);
-                result.Low = Math.Min(grade, result.Low);
-                result.Average += grade;
-            }
-            var index = 0;
-            while (index < grades.Count)
-            {
-                result.High = Math.Max(grades[index], result.High);
-                result.Low = Math.Min(grades[index], result.Low);
-                result.Average += grades[index];
-                index ++;
-            }*/ 
-            for (int i = 0; i < grades.Count; i ++ ){
-                result.High = Math.Max(grades[i], result.High);
-                result.Low = Math.Min(grades[i], result.Low);
-                result.Average +=grades[i];
-            }
+        public override event GradeAddedDelegate GradeAdded;
 
-            result.Average /= grades.Count;
+        public override Statistics GetStatistics(){
+            var result = new Statistics();
+
+            for (int i = 0; i < grades.Count; i ++ ){
+                result.Add(grades[i]);
+            }
             switch (result.Average)
             {
                 case var d when d >= 90: 
