@@ -19,7 +19,7 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            IBook book = new DiskBook("Don't give up");
+            IBook book = new DiskBook("Don't_give_up");
             book.GradeAdded += onGradeAdded;
 
             EnterGrades(book);

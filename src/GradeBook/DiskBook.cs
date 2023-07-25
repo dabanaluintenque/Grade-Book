@@ -24,20 +24,18 @@ namespace GradeBook{
            }
         }
 
-        public override Statistics GetStatistics()
-        {
-           /*var st = new Statistics();
-           st.start = "";
-           using (var reader = File.OpenText($"{Name}.txt")) {
+        public override Statistics GetStatistics(){
+            var st = new Statistics();
             
-
-            while ((st.start = reader.ReadLine()) != null) {
-
+            using (var reader = File.OpenText($"{Name}.txt")) {
+                var file_reader = reader.ReadLine();
+                while(file_reader != null){
+                        var convertyToDouble = double.Parse(file_reader);
+                        st.Add(convertyToDouble);
+                        file_reader = reader.ReadLine();      
+                }   
             }
-
-           } 
-           return st;*/
-           throw new NotImplementedException();
+            return st;
         }
      
     }

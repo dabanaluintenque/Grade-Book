@@ -8,7 +8,7 @@ namespace GradeBook {
             grades = new List<double>();
             Name = name;
         }
-        public char AddLetterGrade( char letter) 
+       /* public char AddLetterGrade( char letter) 
         {
            switch (letter)
            {
@@ -26,7 +26,7 @@ namespace GradeBook {
                 break;
            }
            return letter;
-        }
+        } */
         public override void AddGrade(double grade) {
             
             if (grade >= 0 && grade <= 100)
@@ -46,31 +46,12 @@ namespace GradeBook {
         public override Statistics GetStatistics(){
             var result = new Statistics();
 
-            for (int i = 0; i < grades.Count; i ++ ){
+            for (var i = 0; i < grades.Count; i ++ ){
                 result.Add(grades[i]);
-            }
-            switch (result.Average)
-            {
-                case var d when d >= 90: 
-                    result.Letter = 'A';
-                    break;
-                case var d when d >= 80: 
-                    result.Letter = 'B';;
-                    break;
-                case var d when d >= 70: 
-                    result.Letter = 'C';;
-                    break;
-                case var d when d >= 60: 
-                    result.Letter = 'D';;
-                    break;
-                default:
-                    result.Letter ='F';
-                break;
-
             }
             return result;
         }
-        List<double> grades;
+        private List<double> grades;
        
     }
 }
