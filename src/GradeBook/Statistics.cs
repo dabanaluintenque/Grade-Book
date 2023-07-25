@@ -6,36 +6,33 @@ namespace GradeBook{
         double c = 3.00;
         public double Average {
             get {
-                return  Sum/= Count;
+                return  Sum / Count;
             }
         }
         public double High;
 
         public double Low;
 
-        public char Letter{
+        public char Letter {
+            
             get {
-                if (Sum >= 90){
-                    Console.WriteLine(Sum);
-                    return 'A';
-                }
-                else if (Sum >= 80){
-                    return 'B';
-                }
-                else if (Sum >= 70){
-                    return 'C';
-                }
-                else if (Sum >= 60){
-                    return 'D';
-                }
-                else
+                switch ( Average )
                 {
-                    System.Console.WriteLine(z);
-                    return 'F';
+                    case var d when d >= 90.0: 
+                        return 'A';
+
+                    case var d when d >= 80.0: 
+                        return 'B';
+                    case var d when d >= 70.0: 
+                        return 'C';
+                    case var d when d >= 60.0:
+                        return 'D';
+                    default:
+                        return 'F';
                 }
             }
-        } 
-        
+        }
+
         public double Sum;
         public int Count;
         

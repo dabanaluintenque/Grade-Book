@@ -8,25 +8,7 @@ namespace GradeBook {
             grades = new List<double>();
             Name = name;
         }
-       /* public char AddLetterGrade( char letter) 
-        {
-           switch (letter)
-           {
-            case 'A':
-                AddGrade(90);
-                break;
-            case 'B':
-                AddGrade(80);
-                break;
-            case 'C':
-                AddGrade(70);
-                break;
-            default:
-                AddGrade(0);
-                break;
-           }
-           return letter;
-        } */
+     
         public override void AddGrade(double grade) {
             
             if (grade >= 0 && grade <= 100)
